@@ -19,7 +19,7 @@ const signupUser = async_manager(async (req, res) => {
         throw new Error("User already exists");
     }
     // password hashing
-    const hash_pass = await bycrypt.hash(password, 10);
+    const hash_pass = await bcrypt.hash(password, 10);
     console.log("hashed password: ", hash_pass);
     const new_user = await User.create({
         name,
@@ -80,7 +80,7 @@ const loginUser = async_manager(async (req, res) => {
  * Access: Private
  */
 const getCurrentUser = async_manager(async (req, res) => {
-    res.json({ message: "Current user's data" });
+    res.json(req.user);
 });
 
 module.exports = { signupUser, loginUser, getCurrentUser };

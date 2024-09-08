@@ -3,17 +3,17 @@ const Blog = require("../models/blog_model");
 /*
  * Description: GET all blog posts
  * HTTP Method & Endpoint: GET /api/blogs
- * Access: Public
+ * Access: Private
  */
 const get_posts = async_manager(async (req, res) => {
-    const blogs = await Blog.find();
+    const blogs = await Blog.find({ userID: req.user.id });
     res.status(200).json(blogs);
 });
 
 /*
  * Description: GET a specific blog post
  * HTTP Method & Endpoint: GET /api/blogs/:id
- * Access: Public
+ * Access: Private
  */
 const get_post = async_manager(async (req, res) => {
     const blog_post = await Blog.findById(req.params.id);
@@ -27,7 +27,7 @@ const get_post = async_manager(async (req, res) => {
 /*
  * Description: Create a blog post
  * HTTP Method & Endpoint: POST /api/blogs
- * Access: Public
+ * Access: Private
  */
 const create_post = async_manager(async (req, res) => {
     console.log("the request body: ", req.body);
@@ -40,7 +40,8 @@ const create_post = async_manager(async (req, res) => {
         title,
         content,
         author,
-        tags
+        tags,
+        userID: req.user.id
     });
 
     res.status(201).json(blog_post);
@@ -49,13 +50,17 @@ const create_post = async_manager(async (req, res) => {
 /*
  * Description: Update a blog post
  * HTTP Method & Endpoint: PUT /api/blogs/:id
- * Access: Public
+ * Access: Private
  */
 const update_post = async_manager(async (req, res) => {
     const blog_post = await Blog.findById(req.params.id);
     if (!blog_post) {
         res.status(404);
         throw new Error("Blog post not found!");
+    }
+    if (blog_post.userID.toString() !== req.user.id) {
+        res.status(403);
+        throw new Error("User unallowed to update other users' blog posts");
     }
     const updated_post = await Blog.findByIdAndUpdate(
         req.params.id,
@@ -68,13 +73,17 @@ const update_post = async_manager(async (req, res) => {
 /*
  * Description: Delete a blog post
  * HTTP Method & Endpoint: DELETE /api/blogs/:id
- * Access: Public
+ * Access: Private
  */
 const delete_post = async_manager(async (req, res) => {
     const blog_post = await Blog.findById(req.params.id);
     if (!blog_post) {
         res.status(404);
         throw new Error("Blog post not found!");
+    }
+    if (blog_post.userID.toString() !== req.user.id) {
+        res.status(403);
+        throw new Error("User unallowed to update other users' blog posts");
     }
     await Blog.findByIdAndDelete(req.params.id);
 

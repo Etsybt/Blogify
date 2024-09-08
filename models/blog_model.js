@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 
 const blogSchema = mongoose.Schema(
     {
+        userID: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: "User",
+        },
         title: {
             type: String,
             required: [true, "Please add a title"],
