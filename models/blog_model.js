@@ -30,7 +30,8 @@ const blogSchema = mongoose.Schema(
         comments: [
             {
                 user: {
-                    type: String,
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "User",
                     required: true,
                 },
                 text: {
@@ -42,6 +43,12 @@ const blogSchema = mongoose.Schema(
                     default: Date.now,
                 },
             },
+        ],
+        savedBy: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User",
+            }
         ],
     },
     {
