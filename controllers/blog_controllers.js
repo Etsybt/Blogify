@@ -83,7 +83,7 @@ const delete_post = async_manager(async (req, res) => {
     }
     if (blog_post.userID.toString() !== req.user.id) {
         res.status(403);
-        throw new Error("User unallowed to update other users' blog posts");
+        throw new Error("User unallowed to delete other users' blog posts");
     }
     await Blog.findByIdAndDelete(req.params.id);
 
@@ -141,18 +141,36 @@ const public_get_post = async_manager(async (req, res) => {
  * Access: Private
  */
 const like_post = async_manager(async (req, res) => {
+    // Find the blog post by its ID
     const blog_post = await Blog.findById(req.params.id);
+    
+    // If the blog post is not found, return a 404 error
     if (!blog_post) {
         res.status(404);
         throw new Error("Blog post not found!");
     }
 
-    // Increment the likes count
-    blog_post.likes += 1;
+    // Ensure that the likes field is an array (should have been initialized as such)
+    if (!Array.isArray(blog_post.likes)) {
+        blog_post.likes = [];
+    }
+
+    // Check if the user has already liked this post (prevents multiple likes from the same user)
+    if (blog_post.likes.includes(req.user.id)) {
+        res.status(400);
+        throw new Error("You have already liked this post.");
+    }
+
+    // Add the user's ID to the likes array if they haven't liked it yet
+    blog_post.likes.push(req.user.id);
+
+    // Save the updated blog post
     await blog_post.save();
 
+    // Return the updated blog post, showing the new likes count and list of users who liked it
     res.status(200).json(blog_post);
 });
+
 
 /*
  * Description: Comment on a blog post
