@@ -7,7 +7,6 @@ const {
     update_post,
     delete_post,
     search_posts,
-    public_get_post,
     like_post,
     comment_on_post,
     save_post } = require("../controllers/blog_controllers");
@@ -19,7 +18,6 @@ const upload = multer({ dest: 'uploads/' });
 
 // Public routes
 api.get('/search', search_posts);
-api.get('/:id', public_get_post);
 
 api.use(token_validator);
 

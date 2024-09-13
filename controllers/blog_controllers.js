@@ -17,7 +17,7 @@ const get_posts = async_manager(async (req, res) => {
  * Access: Private
  */
 const get_post = async_manager(async (req, res) => {
-    const blog_post = await Blog.findById(req.params.id);
+    const blog_post = await Blog.find({ userID: req.user.id });
     if (!blog_post) {
         res.status(404);
         throw new Error("Blog post not found!");
@@ -140,20 +140,6 @@ const search_posts = async_manager(async (req, res) => {
     }
 });
 
-/*
- * Description: Get a specific blog post (Public)
- * HTTP Method & Endpoint: GET /api/blogs/:id
- * Access: Public
- */
-const public_get_post = async_manager(async (req, res) => {
-    const blog_post = await Blog.findById(req.params.id);
-    if (!blog_post) {
-        res.status(404);
-        throw new Error("Blog post not found!");
-    }
-    res.status(200).json(blog_post);
-});
-
 //like,comment,save(private)
 
 /*
@@ -162,6 +148,7 @@ const public_get_post = async_manager(async (req, res) => {
  * Access: Private
  */
 const like_post = async_manager(async (req, res) => {
+
     // Find the blog post by its ID
     const blog_post = await Blog.findById(req.params.id);
     
@@ -244,4 +231,4 @@ const save_post = async_manager(async (req, res) => {
 
 
 
-module.exports = { get_posts, get_post, create_post, update_post, delete_post, search_posts, public_get_post, like_post, comment_on_post, save_post };
+module.exports = { get_posts, get_post, create_post, update_post, delete_post, search_posts, like_post, comment_on_post, save_post };
