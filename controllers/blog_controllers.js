@@ -1,5 +1,6 @@
 const async_manager = require("express-async-handler");
 const Blog = require("../models/blog_model");
+const upload = require("../middleware/file_upload");
 /*
  * Description: GET all blog posts
  * HTTP Method & Endpoint: GET /api/blogs
@@ -36,12 +37,16 @@ const create_post = async_manager(async (req, res) => {
         res.status(400);
         throw new Error("Must enter all fields!");
     }
+
+    const headerImage = req.file ? req.file.path : null;
+
     const blog_post = await Blog.create({
         title,
         content,
         author,
         tags,
-        userID: req.user.id
+        userID: req.user.id,
+        headerImage
     });
 
     res.status(201).json(blog_post);
@@ -62,9 +67,15 @@ const update_post = async_manager(async (req, res) => {
         res.status(403);
         throw new Error("User unallowed to update other users' blog posts");
     }
+
+    const headerImage = req.file ? req.file.path : blog_post.headerImage;
+
     const updated_post = await Blog.findByIdAndUpdate(
         req.params.id,
-        req.body,
+        {
+            ...req.body,
+            headerImage
+        },
         { new: true, runValidators: true }
     );
     res.status(200).json(updated_post);
