@@ -33,13 +33,22 @@ const get_post = async_manager(async (req, res) => {
 const create_post = async_manager(async (req, res) => {
     console.log("the request body: ", req.body);
     const { title, content, author, tags } = req.body;
+
+    // Check for missing fields
     if (!title || !content || !author || !tags) {
-        res.status(400);
-        throw new Error("Must enter all fields!");
+        return res.status(400).json({ error: "Must enter all fields!" });
     }
 
+    // Check if a blog post with the same title already exists for the current user
+    const existingPost = await Blog.findOne({ title, userID: req.user.id });
+    if (existingPost) {
+        return res.status(400).json({ error: "You have already created a blog post with this title!" });
+    }
+
+    // Handle the header image if provided
     const headerImage = req.file ? req.file.path : null;
 
+    // Create a new blog post
     const blog_post = await Blog.create({
         title,
         content,
@@ -51,6 +60,7 @@ const create_post = async_manager(async (req, res) => {
 
     res.status(201).json(blog_post);
 });
+
 
 /*
  * Description: Update a blog post
