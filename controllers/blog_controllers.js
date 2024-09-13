@@ -230,5 +230,14 @@ const save_post = async_manager(async (req, res) => {
 });
 
 
-
-module.exports = { get_posts, get_post, create_post, update_post, delete_post, search_posts, like_post, comment_on_post, save_post };
+module.exports = {
+    get_posts,
+    get_post,
+    create_post,
+    update_post,
+    delete_post,
+    search_posts,
+    like_post,
+    comment_on_post,
+    save_post
+  };
