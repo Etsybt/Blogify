@@ -1,5 +1,6 @@
 const async_manager = require("express-async-handler");
 const User = require("../models/user_model");
+const Blog = require("../models/blog_model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 /*
@@ -80,7 +81,28 @@ const loginUser = async_manager(async (req, res) => {
  * Access: Private
  */
 const getCurrentUser = async_manager(async (req, res) => {
-    res.json(req.user);
+    // Find the current user by ID
+    const user = await User.findById(req.user.id).select('-password'); // Exclude the password
+
+    if (!user) {
+        res.status(404).json({ error: "User not found" });
+        return;
+    }
+
+    // Find the number of blogs the user has posted
+    const blogCount = await Blog.countDocuments({ userID: req.user.id });
+
+    // Prepare the response data
+    const responseData = {
+        name: user.name,
+        email: user.email,
+        bio: user.bio,
+        profilePicture: user.profilePicture,
+        createdAt: user.createdAt,
+        blogCount: blogCount, // Number of blogs posted by the user
+    };
+
+    res.status(200).json(responseData);
 });
 
 
