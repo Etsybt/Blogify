@@ -46,7 +46,7 @@ const create_post = async_manager(async (req, res) => {
     }
 
     // Handle the header image if provided
-    const headerImage = req.file ? req.file.path : null;
+    const headerImage = req.file ? `/uploads/${req.file.filename}` : null;
 
     // Create a new blog post
     const blog_post = await Blog.create({
@@ -58,6 +58,10 @@ const create_post = async_manager(async (req, res) => {
         headerImage
     });
 
+    // Append full URL for the header image
+    blog_post.headerImage = headerImage ? `${req.protocol}://${req.get('host')}${headerImage}` : null;
+
+    // Send response with the created blog post
     res.status(201).json(blog_post);
 });
 

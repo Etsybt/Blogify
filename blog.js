@@ -8,6 +8,10 @@ const app = express()
 
 const port = process.env.PORT || 5000;
 
+// Serve uploaded images
+app.use('/uploads', express.static('uploads'));
+
+
 app.use(express.json());
 app.use("/api/blogs", require("./routes/blog_routes"));
 app.use("/api/users", require("./routes/user_routes"));
