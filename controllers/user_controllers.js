@@ -83,4 +83,49 @@ const getCurrentUser = async_manager(async (req, res) => {
     res.json(req.user);
 });
 
-module.exports = { signupUser, loginUser, getCurrentUser };
+
+/*
+ * Description: Update user profile
+ * HTTP Method & Endpoint: PUT /api/users/:id
+ * Access: Private
+ */
+const updateUserProfile = async_manager(async (req, res) => {
+    const { name, bio } = req.body;
+    const profilePicture = req.file ? req.file.path : req.user.profilePicture;
+
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, {
+        name,
+        bio,
+        profilePicture
+    }, { new: true });
+
+    if (!updatedUser) {
+        res.status(404);
+        throw new Error("User not found");
+    }
+
+    res.status(200).json({
+        name: updatedUser.name,
+        bio: updatedUser.bio,
+        profilePicture: updatedUser.profilePicture,
+    });
+});
+
+/*
+ * Description: Delete user account
+ * HTTP Method & Endpoint: DELETE /api/users/:id
+ * Access: Private
+ */
+const deleteUserAccount = async_manager(async (req, res) => {
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+        res.status(404);
+        throw new Error("User not found");
+    }
+
+    await User.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: "Account deleted successfully" });
+});
+
+module.exports = { signupUser, loginUser, getCurrentUser, updateUserProfile, deleteUserAccount };

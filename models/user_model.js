@@ -14,6 +14,14 @@ const userSchema = mongoose.Schema({
         type: String,
         required: [true, "Please add a password"],
     },
+    bio: {
+        type: String,
+        default: "", // Optional bio field
+    },
+    profilePicture: {
+        type: String,
+        default: "", // Path to the profile picture file
+    },
 }, {
     timestamps: true,
 });
