@@ -94,6 +94,7 @@ const getCurrentUser = async_manager(async (req, res) => {
 
     // Prepare the response data
     const responseData = {
+        userID: user.id,
         name: user.name,
         email: user.email,
         bio: user.bio,
