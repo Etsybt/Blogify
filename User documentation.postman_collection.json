@@ -1,0 +1,1809 @@
+{
+	"info": {
+		"_postman_id": "4810153e-55a0-4557-90b4-c024d2844cf0",
+		"name": "User documentation",
+		"description": "This documentation provides endpoints for both **user management** (registration, login, profile) and **blog management** (create, retrieve, update, delete, interact). Each action requires the user to authenticate except for public blog search",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38374890"
+	},
+	"item": [
+		{
+			"name": "Blogs",
+			"item": [
+				{
+					"name": "List Personal Blogs",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJuYW5hIiwiZW1haWwiOiJuYW5hQGV4YW1wbGUuY29tIiwiaWQiOiI2NmU4MWE1YjVjZTM0ZjQ2NzU4MTM3MTcifSwiaWF0IjoxNzI2NTAwMjQzLCJleHAiOjE3MjkwOTIyNDN9.h8Zqt60jWXzOoxZtC-9fGoNZyuln-XIBR18xm2S_QzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/api/blogs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"blogs"
+							],
+							"query": [
+								{
+									"key": "createdAt",
+									"value": "2024-01-10",
+									"description": "(Optional) filter for transactions created on or after date (YYYY-MM-DD)",
+									"disabled": true
+								},
+								{
+									"key": "toAccountId",
+									"value": "19",
+									"description": "(Optional) filter for the account that initiated the transaction",
+									"disabled": true
+								},
+								{
+									"key": "fromAccountId",
+									"value": "17",
+									"description": "(Optional) filter for the account that received the transaction",
+									"disabled": true
+								}
+							]
+						},
+						"description": "This endpoint retrieves the blog posts created by the the current user.\n\n### Response\n\nUpon a successful request, the response will contain a list of blogs created by the current user.\n\nIf no blogs found, the response will be an empty array."
+					},
+					"response": [
+						{
+							"name": "successful request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5001/api/blogs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"blogs"
+									],
+									"query": [
+										{
+											"key": "createdAt",
+											"value": "2024-01-10",
+											"description": "(Optional) filter for transactions created on or after date (YYYY-MM-DD)",
+											"disabled": true
+										},
+										{
+											"key": "toAccountId",
+											"value": "19",
+											"description": "(Optional) filter for the account that initiated the transaction",
+											"disabled": true
+										},
+										{
+											"key": "fromAccountId",
+											"value": "17",
+											"description": "(Optional) filter for the account that received the transaction",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"_id\": \"66e832844b8f105f9204060b\",\n        \"userID\": \"66e81a5b5ce34f4675813717\",\n        \"title\": \"test blog\",\n        \"content\": \"test blog\",\n        \"author\": \"nana\",\n        \"tags\": [\n            \"test\"\n        ],\n        \"headerImage\": \"uploads\\\\e3ca646b6758f7d86dd9618feda86bae\",\n        \"likes\": [],\n        \"savedBy\": [],\n        \"comments\": [],\n        \"createdAt\": \"2024-09-16T13:28:36.206Z\",\n        \"updatedAt\": \"2024-09-16T15:50:39.352Z\",\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"66e84b544b8f105f92040614\",\n        \"userID\": \"66e81a5b5ce34f4675813717\",\n        \"title\": \"my second blog\",\n        \"content\": \"second blog\",\n        \"author\": \"nana\",\n        \"tags\": [\n            \"blog\",\n            \"test\"\n        ],\n        \"headerImage\": null,\n        \"likes\": [],\n        \"savedBy\": [],\n        \"comments\": [],\n        \"createdAt\": \"2024-09-16T15:14:28.349Z\",\n        \"updatedAt\": \"2024-09-16T15:14:28.349Z\",\n        \"__v\": 0\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get a Blog Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJuYW5hIiwiZW1haWwiOiJuYW5hQGV4YW1wbGUuY29tIiwiaWQiOiI2NmU4MWE1YjVjZTM0ZjQ2NzU4MTM3MTcifSwiaWF0IjoxNzI2NDkzMTYxLCJleHAiOjE3MjkwODUxNjF9.5PtKNLbZo1Vij2Q0dx7KIG-0HezCPRRxoxdCuu3yStI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/api/blogs/66e84b544b8f105f92040614",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"blogs",
+								"66e84b544b8f105f92040614"
+							]
+						},
+						"description": "This endpoint retrieves a specific blog post by its ID, belonging to the current user.\n\n**Response**:\n\n  \nUpon a successful request, the response will contain the details of the blog post with the specified ID.  \nIf the blog post is not found, the response will return an error message."
+					},
+					"response": [
+						{
+							"name": "successful request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5001/api/blogs/66e84b544b8f105f92040614",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"blogs",
+										"66e84b544b8f105f92040614"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"66e84b544b8f105f92040614\",\n    \"userID\": \"66e81a5b5ce34f4675813717\",\n    \"title\": \"my second blog\",\n    \"content\": \"second blog\",\n    \"author\": \"nana\",\n    \"tags\": [\n        \"blog\",\n        \"test\"\n    ],\n    \"headerImage\": null,\n    \"likes\": [],\n    \"savedBy\": [],\n    \"comments\": [],\n    \"createdAt\": \"2024-09-16T15:14:28.349Z\",\n    \"updatedAt\": \"2024-09-16T15:14:28.349Z\",\n    \"__v\": 0\n}"
+						},
+						{
+							"name": "Blog post not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5001/api/blogs/66e84b544b8f105f92040618",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"blogs",
+										"66e84b544b8f105f92040618"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Blog post not found!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create New Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJuYW5hIiwiZW1haWwiOiJuYW5hQGV4YW1wbGUuY29tIiwiaWQiOiI2NmU4MWE1YjVjZTM0ZjQ2NzU4MTM3MTcifSwiaWF0IjoxNzI2NDkzMTYxLCJleHAiOjE3MjkwODUxNjF9.5PtKNLbZo1Vij2Q0dx7KIG-0HezCPRRxoxdCuu3yStI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"my second blog\",\n    \"content\": \"second blog\",\n    \"author\": \"nana\",\n    \"tags\": [\"blog\", \"test\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/api/blogs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"blogs"
+							]
+						},
+						"description": "This endpoint allows the authenticated user to create a new blog post.\n\n**Response**:\n\n  \nUpon a successful request, the response will contain the details of the newly created blog post.  \nIf there is a validation error, an error message will be returned."
+					},
+					"response": [
+						{
+							"name": "successful request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"my third blog\",\n    \"content\": \"third blog\",\n    \"author\": \"nana\",\n    \"tags\": [\"blogs\", \"test\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5001/api/blogs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"blogs"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "blog post created successfully!"
+						},
+						{
+							"name": "Missing fields",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"my fifth blog\",\n    \"tags\": [\"blog\", \"test\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5001/api/blogs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"blogs"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{ \"error\": \"Must enter all fields!\" }"
+						},
+						{
+							"name": "Existing post",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"my second blog\",\n    \"content\": \"second blog\",\n    \"author\": \"nana\",\n    \"tags\": [\"blog\", \"test\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5001/api/blogs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"blogs"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"You have already created a blog post with this title!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Blog",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJub3VoYSIsImVtYWlsIjoibm91aGFAZ21haWwuY29tIiwiaWQiOiI2NmU0OGY2NDZkODI3OThkZmJkZTdlNmIifSwiaWF0IjoxNzI2NTA2MDM5LCJleHAiOjE3MjkwOTgwMzl9.KM2bY9XJsaYuX_wHMrl7Xgu2tPyVjtoj5hX3kPvKL98",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "headerImage",
+									"type": "file",
+									"src": "/C:/Users/DELL/OneDrive/Desktop/shared_VG_file/gym.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5001/api/blogs/66e832844b8f105f9204060b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"blogs",
+								"66e832844b8f105f9204060b"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						},
+						"description": "This endpoint allows the authenticated user to update their blog post by its ID.\n\n**Response**:  \nUpon a successful request, the response will contain the updated blog post details.  \nIf the blog post is not found, the response will return an error message."
+					},
+					"response": [
+						{
+							"name": "Updated successfully",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "tags",
+											"value": "tag",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:5001/api/blogs/66e832844b8f105f9204060b",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"blogs",
+										"66e832844b8f105f9204060b"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "post updates successfully!"
+						},
+						{
+							"name": "Post not found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "tags",
+											"value": "tag",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:5001/api/blogs/66e832844b8f105f92040609",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"blogs",
+										"66e832844b8f105f92040609"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"error\": \"Blog post not found!\"\r\n}"
+						},
+						{
+							"name": "Unallowed",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "headerImage",
+											"type": "file",
+											"src": "/C:/Users/DELL/OneDrive/Desktop/shared_VG_file/gym.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:5001/api/blogs/66e832844b8f105f9204060b",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"blogs",
+										"66e832844b8f105f9204060b"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"User unallowed to update other users' blog posts\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Blog",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/api/blogs/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"blogs",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "This endpoint allows the authenticated user to delete their blog post by its ID.\n\n**Response**:  \nUpon a successful request, the response will confirm the deletion of the blog post.  \nIf the blog post is not found, the response will return an error message."
+					},
+					"response": []
+				},
+				{
+					"name": "Search All Blogs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/api/blogs/search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"blogs",
+								"search"
+							]
+						},
+						"description": "This endpoint allows users to search for blog posts by title and/or tags.\n\n**Response**:  \nUpon a successful request, the response will contain a list of blog posts that match the search criteria.  \nIf no matching posts are found, the response will return an empty array."
+					},
+					"response": [
+						{
+							"name": "Search All Blogs",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5001/api/blogs/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"blogs",
+										"search"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "Listing of all blogs"
+						},
+						{
+							"name": "Search a blog by title",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5001/api/blogs/search?title=test",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"blogs",
+										"search"
+									],
+									"query": [
+										{
+											"key": "title",
+											"value": "test"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "blogs that contains \"test\" in their title\""
+						},
+						{
+							"name": "Search blogs by title & tags",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5001/api/blogs/search?title=test&tags=test",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"blogs",
+										"search"
+									],
+									"query": [
+										{
+											"key": "title",
+											"value": "test"
+										},
+										{
+											"key": "tags",
+											"value": "test"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "list blogs that contails \"test\" in their title and tags."
+						},
+						{
+							"name": "No Match",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5001/api/blogs/search?title=prep",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"blogs",
+										"search"
+									],
+									"query": [
+										{
+											"key": "title",
+											"value": "prep"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No match found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Like a Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJub3VoYSIsImVtYWlsIjoibm91aGFAZ21haWwuY29tIiwiaWQiOiI2NmU0OGY2NDZkODI3OThkZmJkZTdlNmIifSwiaWF0IjoxNzI2NTA2MDM5LCJleHAiOjE3MjkwOTgwMzl9.KM2bY9XJsaYuX_wHMrl7Xgu2tPyVjtoj5hX3kPvKL98",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/api/blogs/:id/like",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"blogs",
+								":id",
+								"like"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "This endpoint allows the authenticated user to like a specific blog post.\n\n**Response**:  \nUpon a successful request, the response will confirm that the blog post was liked.  \nIf the blog post is not found, the response will return an error message."
+					},
+					"response": [
+						{
+							"name": "Successful request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5001/api/blogs/66e4b5adb4095f7870a0e415/like",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"blogs",
+										"66e4b5adb4095f7870a0e415",
+										"like"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "post gets liked successfully."
+						},
+						{
+							"name": "Already liked",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5001/api/blogs/66e4b5adb4095f7870a0e415/like",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"blogs",
+										"66e4b5adb4095f7870a0e415",
+										"like"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"You have already liked this post.\"\n}"
+						},
+						{
+							"name": "Not found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5001/api/blogs/66e4b5adb4095f7870a0e419/like",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"blogs",
+										"66e4b5adb4095f7870a0e419",
+										"like"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Blog post not found!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Comment on Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJuYW5hIiwiZW1haWwiOiJuYW5hQGV4YW1wbGUuY29tIiwiaWQiOiI2NmU4MWE1YjVjZTM0ZjQ2NzU4MTM3MTcifSwiaWF0IjoxNzI2NDkzMTYxLCJleHAiOjE3MjkwODUxNjF9.5PtKNLbZo1Vij2Q0dx7KIG-0HezCPRRxoxdCuu3yStI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/api/blogs/:id/comment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"blogs",
+								":id",
+								"comment"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "This endpoint allows the authenticated user to comment on a specific blog post.\n\n**Response**:  \nUpon a successful request, the response will contain the details of the new comment added to the blog post.  \nIf the blog post is not found, the response will return an error message."
+					},
+					"response": [
+						{
+							"name": "Successful request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"interesting post!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5001/api/blogs/66e4901e09fbe360ab715ef1/comment",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"blogs",
+										"66e4901e09fbe360ab715ef1",
+										"comment"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "comment gets added."
+						},
+						{
+							"name": "Comment text required",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5001/api/blogs/66e4901e09fbe360ab715ef1/comment",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"blogs",
+										"66e4901e09fbe360ab715ef1",
+										"comment"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Comment text is required\"\n}"
+						},
+						{
+							"name": "Not found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5001/api/blogs/66e4901e09fbe360ab715ed6/comment",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"blogs",
+										"66e4901e09fbe360ab715ed6",
+										"comment"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Blog post not found!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Save a Blog",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJub3VoYSIsImVtYWlsIjoibm91aGFAZ21haWwuY29tIiwiaWQiOiI2NmU0OGY2NDZkODI3OThkZmJkZTdlNmIifSwiaWF0IjoxNzI2NTA2MDM5LCJleHAiOjE3MjkwOTgwMzl9.KM2bY9XJsaYuX_wHMrl7Xgu2tPyVjtoj5hX3kPvKL98",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/api/blogs/:id/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"blogs",
+								":id",
+								"save"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "This endpoint allows the authenticated user to save a specific blog post for future reference.\n\n**Response**:  \nUpon a successful request, the response will confirm that the blog post was saved.  \nIf the blog post is not found, the response will return an error message."
+					},
+					"response": [
+						{
+							"name": "Save a Blog",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5001/api/blogs/66e4b5adb4095f7870a0e415/save",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"blogs",
+										"66e4b5adb4095f7870a0e415",
+										"save"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "post gets saved"
+						},
+						{
+							"name": "Not found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5001/api/blogs/66e4b5adb4095f7870a0e498/save",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"blogs",
+										"66e4b5adb4095f7870a0e498",
+										"save"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Blog post not found!\"\n}"
+						}
+					]
+				}
+			],
+			"description": "<img src=\"https://cdn-icons-png.flaticon.com/512/1809/1809216.png\" alt=\"Blogs%20Management%20API\" width=\"156\" height=\"234\">\n\nThe Blogs Management API allows users to manage their blog posts by providing functionality to create, retrieve, update, and delete blog posts. It also supports interactions such as liking, commenting, saving blog posts, and searching by title or tags. Most actions are restricted to authenticated users, while searching is available to the public.\n\n**Available Endpoints:**\n\n1. **Get All Blog Posts**:\n    \n    - Retrieves all blog posts created by the logged-in user.\n        \n    - Endpoint: `GET /api/blogs`\n        \n    - Access: Private\n        \n2. **Get a Specific Blog Post**:\n    \n    - Retrieves a specific blog post by its ID, belonging to the logged-in user.\n        \n    - Endpoint: `GET /api/blogs/:id`\n        \n    - Access: Private\n        \n3. **Create a Blog Post**:\n    \n    - Allows an authenticated user to create a new blog post. The post can include a title, content, author, tags, and an optional header image.\n        \n    - Endpoint: `POST /api/blogs`\n        \n    - Access: Private\n        \n4. **Update a Blog Post**:\n    \n    - Allows an authenticated user to update their blog post by ID.\n        \n    - Endpoint: `PUT /api/blogs/:id`\n        \n    - Access: Private\n        \n5. **Delete a Blog Post**:\n    \n    - Allows an authenticated user to delete their blog post by ID.\n        \n    - Endpoint: `DELETE /api/blogs/:id`\n        \n    - Access: Private\n        \n6. **Search Blog Posts**:\n    \n    - Allows anyone to search blog posts by title and/or tags.\n        \n    - Endpoint: `GET /api/blogs/search`\n        \n    - Access: Public\n        \n7. **Like a Blog Post**:\n    \n    - Allows an authenticated user to like a specific blog post.\n        \n    - Endpoint: `PUT /api/blogs/:id/like`\n        \n    - Access: Private\n        \n8. **Comment on a Blog Post**:\n    \n    - Allows an authenticated user to comment on a specific blog post.\n        \n    - Endpoint: `POST /api/blogs/:id/comment`\n        \n    - Access: Private\n        \n9. **Save a Blog Post**:\n    \n    - Allows an authenticated user to save a blog post for future reference.\n        \n    - Endpoint: `PUT /api/blogs/:id/save`\n        \n    - Access: Private"
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get Account",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJuYW5hIiwiZW1haWwiOiJuYW5hQGV4YW1wbGUuY29tIiwiaWQiOiI2NmU4MWE1YjVjZTM0ZjQ2NzU4MTM3MTcifSwiaWF0IjoxNzI2NTAwMjQzLCJleHAiOjE3MjkwOTIyNDN9.h8Zqt60jWXzOoxZtC-9fGoNZyuln-XIBR18xm2S_QzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/api/users/current",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"users",
+								"current"
+							]
+						},
+						"description": "This endpoint retrieves the profile information of the currently logged-in user. This includes the user’s name, email, bio, profile picture, and the number of blog posts they've published.\n\n**Response**:  \nUpon a successful request, the response will contain the current user’s profile information.  \nIf no user is found or the token is invalid, an error message will be returned."
+					},
+					"response": [
+						{
+							"name": "Successful Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5001/api/users/current",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"users",
+										"current"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userID\": \"user_id_here\",\n    \"name\": \"John Doe\",\n    \"email\": \"johndoe@example.com\",\n    \"bio\": \"A short bio\",\n    \"profilePicture\": \"profile_picture_url\",\n    \"createdAt\": \"2023-09-15T10:15:30Z\",\n    \"blogCount\": 5\n}"
+						},
+						{
+							"name": "User Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5001/api/users/current",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"users",
+										"current"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n  \"error\": \"User not found\"\r\n\r\n"
+						}
+					]
+				},
+				{
+					"name": "Update Account",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJuYW5hIiwiZW1haWwiOiJuYW5hQGV4YW1wbGUuY29tIiwiaWQiOiI2NmU4MWE1YjVjZTM0ZjQ2NzU4MTM3MTcifSwiaWF0IjoxNzI2NDkzMTYxLCJleHAiOjE3MjkwODUxNjF9.5PtKNLbZo1Vij2Q0dx7KIG-0HezCPRRxoxdCuu3yStI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/api/users/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "This endpoint allows the authenticated user to update their profile details, such as their name, bio, and profile picture.\n\n**Response**:  \nUpon a successful request, the response will contain the updated profile details of the user.  \nIf the update fails or the user is not authenticated, an error message will be returned."
+					},
+					"response": [
+						{
+							"name": "Successful Update",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"bio\": \"Updated bio\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5001/api/users/66e81a5b5ce34f4675813717",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"users",
+										"66e81a5b5ce34f4675813717"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"bio\": \"Updated bio\"\n}"
+						},
+						{
+							"name": "User Not Found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"pete\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5001/api/users/66e81a5b5ce34f4675813700",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"users",
+										"66e81a5b5ce34f4675813700"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"User not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Account",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/api/users/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "This endpoint allows the authenticated user to permanently delete their account from the system.\n\n**Response**:  \nUpon a successful request, the response will confirm that the user account has been deleted.  \nIf the deletion fails or the user is not authenticated, an error message will be returned."
+					},
+					"response": [
+						{
+							"name": "Successful Deletion",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5001/api/users/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Account deleted successfully\"\n}"
+						},
+						{
+							"name": "User Not Found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5001/api/users/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"User not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create New Account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"tj\",\n  \"email\": \"tj@example.com\",\n  \"password\": \"tj\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/api/users/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"users",
+								"signup"
+							]
+						},
+						"description": "This endpoint allows new users to create an account by providing their name, email, and password. Passwords are securely hashed before being saved in the database.\n\n**Response**:  \nUpon a successful request, the response will contain the user’s profile details, including their unique ID, name, and email.  \nIf the registration fails, an error message will be returned."
+					},
+					"response": [
+						{
+							"name": "Successful Signup",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"tj\",\n  \"email\": \"tj@example.com\",\n  \"password\": \"tj\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5001/api/users/signup",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"users",
+										"signup"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"UserId\",\n    \"email\": \"tj@example.com\"\n}"
+						},
+						{
+							"name": "Missing Fields",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"exp@example.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5001/api/users/signup",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"users",
+										"signup"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "User Already Exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"nana\",\n  \"email\": \"nana@example.com\",\n  \"password\": \"nana\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5001/api/users/signup",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"users",
+										"signup"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						},
+						"description": "This endpoint authenticates a user using their email and password. Upon successful authentication, a JWT token is issued, which is required for accessing protected resources.\n\n**Response**:  \nUpon a successful request, the response will include the JWT token, which must be used to access protected endpoints.  \nIf authentication fails, an error message will be returned."
+					},
+					"response": [
+						{
+							"name": "successful login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"nana@example.com\",\r\n    \"password\": \"nana\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5001/api/users/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"users",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"email\": \"user@example.com\",\n    \"password\": \"correct_password\"\n}"
+						},
+						{
+							"name": "Missing Fields",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"nana@example.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5001/api/users/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"users",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n  \"email\": \"\"\r\n}"
+						},
+						{
+							"name": "Invalid Credentials",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"user@example.com\",\r\n  \"password\": \"wrong_password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5001/api/users/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"users",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"email\": \"user@example.com\",\n    \"password\": \"wrong_password\"\n}"
+						}
+					]
+				}
+			],
+			"description": "<img src=\"https://static.prod01.ue1.p.pcomm.net/blackbaud/user_content/photos/000/006/6783/a6132a5cd55abcae190bc82567ca8a47-original-users.png\" alt=\"Users%20Management%20API\" width=\"266\" height=\"128\">\n\nThis section provides endpoints for managing user accounts in the system.\n\nThe Users Management API provides several key functionalities to manage user accounts within the application. The available endpoints allow users to register, log in, retrieve profile details, update their profile, and delete their account.\n\n**Available Endpoints:**\n\n1. **User Registration (Signup)**:  \n    Allows new users to create an account by providing their name, email, and password. Passwords are securely hashed before being saved in the database.\n    \n2. **User Login**:  \n    Authenticates a user using their email and password. Upon successful authentication, a JWT token is issued, which is required for accessing protected resources.\n    \n3. **Get Current User**:  \n    Retrieves the profile information of the currently logged-in user. This includes the user’s name, email, bio, profile picture, and the number of blog posts they've published.\n    \n4. **Update User Profile**:  \n    Allows the user to update their profile details, such as their name, bio, and profile picture. Only the authenticated user can update their own profile.\n    \n5. **Delete User Account**:  \n    Enables users to delete their account from the system. This action is permanent and cannot be undone.\n    \n\n**Note**: Some of the endpoints require authentication using a valid JWT token to access protected user data."
+		}
+	],
+	"auth": {
+		"type": "bearer"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://template.postman-echo.com",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "apiKey",
+			"value": "yFlMjSup.IbHOCjyRiTb8QOO9Ltsbr",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}
