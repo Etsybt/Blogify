@@ -28,5 +28,32 @@ Make sure you have the following installed:
 ### Clone the Repository
 ```bash
 git clone https://github.com/Etsybt/blogify.git
-cd your-repo-name
+cd Blogify
+```
 
+### Install dependencies
+```bash
+npm install
+```
+
+### Setup Environment Variables
+Create a .env file in the root directory and add the following environment variables:
+```bash
+PORT=5000
+MONGO_URI=mongodb://localhost:27017/blogify
+JWT_SECRET=your_jwt_secret
+```
+
+### Run the Application
+To start the server, run:
+```bash
+npm run dev
+```
+
+---
+
+### License
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+
+### Contact
+For any inquiries or questions, please reach out to [hmidouchnouhaila2@gmail.com](mailto:hmidouchnouhaila2@gmail.com).
