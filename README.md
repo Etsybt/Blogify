@@ -37,7 +37,7 @@ Make sure you have the following installed:
 
 ### Clone the Repository
 ```bash
-git clone https://github.com/Etsybt/blogify.git
+git clone https://github.com/Etsybt/Blogify.git
 cd Blogify
 ```
 
