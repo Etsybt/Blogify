@@ -17,10 +17,10 @@ const get_posts = async_manager(async (req, res) => {
  * Access: Private
  */
 const get_post = async_manager(async (req, res) => {
-    const blog_post = await Blog.find({ userID: req.user.id });
+    const blog_post = await Blog.findOne({ userID: req.user.id, _id: req.params.id });
     if (!blog_post) {
-        res.status(404);
-        throw new Error("Blog post not found!");
+        res.status(404).json({ error: "Blog post not found!" });
+        return;
     }
     res.status(200).json(blog_post);
 });
