@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Etsybt/Blogify.git"
+    "url": "git+https://github.com/Etsybt/Blogify_V2.git"
   },
   "author": "Nouhaila Hmidouch",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Etsybt/Blogify/issues"
+    "url": "https://github.com/Etsybt/Blogify_V2/issues"
   },
-  "homepage": "https://github.com/Etsybt/Blogify#readme",
+  "homepage": "https://github.com/Etsybt/Blogify_V2#readme",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
